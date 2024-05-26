@@ -2,6 +2,8 @@ import sqlite3
 from person import Person
 from user import User
 from admin import Admin
+from contributor import Contributor
+from partner import Partner
 
 
 def register_user(username, password, name, role):
@@ -86,6 +88,52 @@ def admin_menu(admin):
             print("Invalid choice. Please try again.")
 
 
+def contributor_menu(contributor):
+    while True:
+        print("\nContributor Menu:")
+        print("1. Publish Material")
+        print("2. Comment on Offer")
+        print("3. Rate Offer")
+        print("4. Logout")
+        choice = input("Enter choice: ")
+
+        if choice == '1':
+            material = input("Enter the material: ")
+            contributor.publish_material(material)
+            print("Material published successfully.")
+        elif choice == '2':
+            offer_id = input("Enter the offer ID to comment on: ")
+            comment = input("Enter your comment: ")
+            contributor.comment_on_offer(offer_id, comment)
+            print("Comment added successfully.")
+        elif choice == '3':
+            offer_id = input("Enter the offer ID to rate: ")
+            rating = input("Enter your rating (1-5): ")
+            contributor.rate_offer(offer_id, rating)
+            print("Offer rated successfully.")
+        elif choice == '4':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+def partner_menu(partner):
+    while True:
+        print("\nPartner Menu:")
+        print("1. Provide Support")
+        print("2. Logout")
+        choice = input("Enter choice: ")
+
+        if choice == '1':
+            new_user = input("Enter the new user's username to support: ")
+            partner.provide_support(new_user)
+            print("Support provided successfully.")
+        elif choice == '2':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
 def main():
     while True:
         print("\nWelcome to the Community Exchange Platform")
@@ -108,7 +156,14 @@ def main():
                     admin = Admin(
                         username=user_data[1], password=user_data[2], name=user_data[3])
                     admin_menu(admin)
-                # Add similar logic for 'contributor' and 'partner' roles
+                elif role == 'contributor':
+                    contributor = Contributor(
+                        username=user_data[1], password=user_data[2], name=user_data[3])
+                    contributor_menu(contributor)
+                elif role == 'partner':
+                    partner = Partner(
+                        username=user_data[1], password=user_data[2], name=user_data[3])
+                    partner_menu(partner)
             else:
                 print("Invalid username or password")
 

@@ -26,6 +26,30 @@ def setup_database():
     )
     ''')
 
+    # Create comments table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS comments (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        offer_id INTEGER,
+        username TEXT,
+        comment TEXT,
+        FOREIGN KEY (offer_id) REFERENCES offers (id),
+        FOREIGN KEY (username) REFERENCES users (username)
+    )
+    ''')
+
+    # Create ratings table
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS ratings (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        offer_id INTEGER,
+        username TEXT,
+        rating INTEGER,
+        FOREIGN KEY (offer_id) REFERENCES offers (id),
+        FOREIGN KEY (username) REFERENCES users (username)
+    )
+    ''')
+
     conn.commit()
     conn.close()
 
