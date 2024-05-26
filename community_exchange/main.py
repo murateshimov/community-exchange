@@ -1,5 +1,6 @@
 import sqlite3
 from person import Person
+from user import User
 
 
 def register_user(username, password, name, role):
@@ -26,9 +27,32 @@ def authenticate_user(username, password):
     return user
 
 
+def user_menu(user):
+    while True:
+        print("\nUser Menu:")
+        print("1. Publish Offer")
+        print("2. View Offers")
+        print("3. Logout")
+        choice = input("Enter choice: ")
+
+        if choice == '1':
+            offer = input("Enter the offer description: ")
+            user.publish_offer(offer)
+            print("Offer published successfully.")
+        elif choice == '2':
+            offers = user.view_offers()
+            print("\nOffers:")
+            for offer in offers:
+                print(f"- {offer}")
+        elif choice == '3':
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
 def main():
     while True:
-        print("Welcome to the Community Exchange Platform")
+        print("\nWelcome to the Community Exchange Platform")
         print("1. Login")
         print("2. Register")
         choice = input("Enter choice: ")
@@ -36,12 +60,13 @@ def main():
         if choice == '1':
             username = input("Enter username: ")
             password = input("Enter password: ")
-            user = authenticate_user(username, password)
-            if user:
-                print(f"Welcome {user[3]}")  # user[3] is the name
-                # Show menu based on user role
-                # Placeholder for future role-based menu
-                print(f"Logged in as {user[4]}")  # user[4] is the role
+            user_data = authenticate_user(username, password)
+            if user_data:
+                print(f"Welcome {user_data[3]}")  # user_data[3] is the name
+                # Create a User object
+                user = User(
+                    username=user_data[1], password=user_data[2], name=user_data[3])
+                user_menu(user)
             else:
                 print("Invalid username or password")
 
