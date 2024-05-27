@@ -5,7 +5,7 @@
 
 ## Video Demo 🎥
 
-[![Watch the video](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
+[![Watch the video](https://img.youtube.com/vi/9Io8qy0DzkE/0.jpg)](https://www.youtube.com/watch?v=9Io8qy0DzkE)
 
 Community Exchange Platform is a console-based application designed to facilitate the exchange of items, services, and skills within a community. Members can publish offers, search for offers, and communicate with each other to arrange exchanges. The platform supports different roles including User, Admin, Contributor, and Partner, each with specific functionalities. The application uses SQLite3 for persistent data storage. 🗄️
 
