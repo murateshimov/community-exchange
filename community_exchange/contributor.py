@@ -9,6 +9,7 @@ class Contributor(Person):
     def publish_material(self, material):
         # Logic to publish materials
         print(f"Material published: {material}")
+        pass
 
     def comment_on_offer(self, offer_id, comment):
         # Logic to comment on offers
@@ -18,6 +19,7 @@ class Contributor(Person):
                        (offer_id, self.username, comment))
         conn.commit()
         conn.close()
+        pass
 
     def rate_offer(self, offer_id, rating):
         # Logic to rate offers
@@ -27,3 +29,16 @@ class Contributor(Person):
                        (offer_id, self.username, rating))
         conn.commit()
         conn.close()
+        pass
+
+    def view_offers(self):
+        # Retrieve and display all offers from the database
+        conn = sqlite3.connect('community_exchange.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, user_id, offer FROM offers")
+        offers = cursor.fetchall()
+        conn.close()
+        if offers:
+            return offers
+        else:
+            return "No offers available."

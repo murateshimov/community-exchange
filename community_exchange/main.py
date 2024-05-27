@@ -94,24 +94,31 @@ def contributor_menu(contributor):
         print("1. Publish Material")
         print("2. Comment on Offer")
         print("3. Rate Offer")
-        print("4. Logout")
+        print("4. View Offers")
+        print("5. Logout")
         choice = input("Enter choice: ")
 
         if choice == '1':
             material = input("Enter the material: ")
             contributor.publish_material(material)
-            print("Material published successfully.")
         elif choice == '2':
             offer_id = input("Enter the offer ID to comment on: ")
             comment = input("Enter your comment: ")
             contributor.comment_on_offer(offer_id, comment)
-            print("Comment added successfully.")
         elif choice == '3':
             offer_id = input("Enter the offer ID to rate: ")
-            rating = input("Enter your rating (1-5): ")
+            rating = int(input("Enter your rating (1-5): "))
             contributor.rate_offer(offer_id, rating)
-            print("Offer rated successfully.")
         elif choice == '4':
+            offers = contributor.view_offers()
+            if isinstance(offers, list):
+                for offer in offers:
+                    print(
+                        f"Offer ID: {offer[0]}, User ID: {offer[1]}, Description: {offer[2]}")
+            else:
+                print(offers)
+        elif choice == '5':
+            print("Logging out...")
             break
         else:
             print("Invalid choice. Please try again.")
